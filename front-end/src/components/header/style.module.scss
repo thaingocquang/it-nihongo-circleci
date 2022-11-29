@@ -1,0 +1,28 @@
+.PageHeading {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  & .WebName {
+    font-weight: 700 !important;
+    font-size: 30px;
+    margin-right: 50px;
+  }
+
+  & .IconNavbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    svg {
+      margin: 0 20px;
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+    }
+  }
+
+  .UserAccount {
+    justify-content: flex-end !important;
+  }
+}

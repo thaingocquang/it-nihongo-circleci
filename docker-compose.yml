@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: back-end
+    ports:
+      - "9000:9000"
+    container_name: bdmt-api
+
+  ui:
+    build:
+      context: front-end
+    ports:
+      - "3000:3000"
+    container_name: bdmt-ui
+
+networks:
+  bdmt-net:
+    driver: bridge
