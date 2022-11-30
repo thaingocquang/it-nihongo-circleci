@@ -17,12 +17,16 @@ jobs:
       - docker/check:
           docker-username: DOCKER_USER
           docker-password: DOCKER_PASSWORD
+      - run:
+          command: cd back-end
       - docker/build:
-          path: ./back-end
           image: $DOCKER_USER/$DOCKER_IMAGE_API
           tag: $DOCKER_TAG
+      - run:
+          command: cd ..
+      - run:
+          command: cd front-end
       - docker/build:
-          path: ./front-end
           image: $DOCKER_USER/$DOCKER_IMAGE_UI
           tag: $DOCKER_TAG
 
