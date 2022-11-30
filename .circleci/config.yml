@@ -7,7 +7,8 @@ orbs:
 jobs:
   build-and-push:
     environment:
-      DOCKER_IMAGE: myapp
+      DOCKER_IMAGE_API: bdmt-api
+      DOCKER_IMAGE_UI: bdmt-ui
       DOCKER_TAG: latest
     executor: docker/docker
     steps:
@@ -17,12 +18,19 @@ jobs:
           docker-username: DOCKER_USER
           docker-password: DOCKER_PASSWORD
       - docker/build:
-          image: $DOCKER_USER/$DOCKER_IMAGE
+          image: $DOCKER_USER/$DOCKER_IMAGE_API
+          tag: $DOCKER_TAG
+      - docker/build:
+          image: $DOCKER_USER/$DOCKER_IMAGE_UI
           tag: $DOCKER_TAG
 
       - docker/push:
           digest-path: /tmp/digest.txt
-          image: $DOCKER_USER/$DOCKER_IMAGE
+          image: $DOCKER_USER/$DOCKER_IMAGE_API
+          tag: $DOCKER_TAG
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $DOCKER_USER/$DOCKER_IMAGE_UI
           tag: $DOCKER_TAG
       - run:
           command: |
@@ -33,7 +41,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - $SSH_KEY_FINGERPRINT
-      - run: ssh -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER './deploy.sh'
+      - run: ssh -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER -p 4433 './deploy.sh'
 workflows:
   commit:
     jobs:
