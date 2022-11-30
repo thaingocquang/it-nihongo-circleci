@@ -18,11 +18,11 @@ jobs:
           docker-username: DOCKER_USER
           docker-password: DOCKER_PASSWORD
       - docker/build:
-          docker-context: back-end
+          docker-context: ./back-end
           image: $DOCKER_USER/$DOCKER_IMAGE_API
           tag: $DOCKER_TAG
       - docker/build:
-          docker-context: front-end
+          docker-context: ./front-end
           image: $DOCKER_USER/$DOCKER_IMAGE_UI
           tag: $DOCKER_TAG
 
