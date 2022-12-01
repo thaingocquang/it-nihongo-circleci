@@ -45,7 +45,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - $SSH_KEY_FINGERPRINT
-      - run: ssh -q -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER -p 4433 './deploy.sh'
+      - run: ssh -oStrictHostKeyChecking=no $DEPLOYED_USER@$DEPLOYED_SERVER -p 4433 './deploy.sh'
 workflows:
   commit:
     jobs:
